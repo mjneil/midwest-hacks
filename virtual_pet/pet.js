@@ -36,7 +36,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.dy = 0;
         
     this.setPosition(this.x, this.y);
-    this.updateLook();
+    
 	this.eyeTexture = {
 		angry: 'images/eyes1_angry.svg',
 		happy: 'images/eyes1_happy.svg',
@@ -129,6 +129,8 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	var footLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, -this.width*.3, 0, 1, 0).setFill('images\/foot.svg').setScale(-.8,.8);
 	legLeft.appendChild(footLeft);
 	
+	this.updateLook();
+	
     var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
 	this.startTime = [];
@@ -150,7 +152,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         this.happiness = Math.max(this.happiness - .01, 0);
         this.hunger = Math.max(this.hunger - .01, 0);
 		this.health = Math.max(this.health - .01, 0);
-		this.energy = Math.max(this.energy + .01, 0);
+		this.energy = Math.min(this.energy + .01, 100);
 		
 		this.age += .1;
 		this.growth = Math.min((this.growth + .0001*(this.happiness + this.hunger + this.health + this.energy) / 400) , 1.2);
@@ -237,7 +239,20 @@ goog.inherits(virtual_pet.Pet,lime.RoundedRect);
  */
 virtual_pet.Pet.prototype.updateLook = function() {
     this.setSize(this.width,this.height);
-    
+	
+    if(this.happiness > 75){
+		this.headParts[0].setFill(this.eyeTexture.happy);
+		this.headParts[1].setFill(this.mouthTexture.happy);
+	}else if(this.happiness > 50){
+		this.headParts[0].setFill(this.eyeTexture.none);
+		this.headParts[1].setFill(this.mouthTexture.none);
+	}else if(this.happiness > 25){
+		this.headParts[0].setFill(this.eyeTexture.sad);
+		this.headParts[1].setFill(this.mouthTexture.sad);
+	}else if(this.happiness > 0){
+		this.headParts[0].setFill(this.eyeTexture.angry);
+		this.headParts[1].setFill(this.mouthTexture.sad);
+	}
     //color according to the happiness (between green and red)
     var redAmount = parseInt((this.health)/100*this.colorR);
     var greenAmount = parseInt((100-this.health)/100*this.colorG);

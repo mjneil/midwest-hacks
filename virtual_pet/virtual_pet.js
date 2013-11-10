@@ -7,6 +7,7 @@ goog.require('lime.Director');
 goog.require('lime.Scene');
 goog.require('lime.Layer');
 goog.require('lime.Circle');
+goog.require('lime.fill.LinearGradient');
 goog.require('virtual_pet.Pet');
 goog.require('virtual_pet.Item');
 goog.require('virtual_pet.BodyPart');
@@ -33,9 +34,15 @@ virtual_pet.start = function(e){
 	
 	var vend = new virtual_pet.Vend(200,300,gameObj).setAnchorPoint(0,1).setSize(200,300).setPosition(gameObj.width/10,gameObj.ground).setFill('images\/vending.svg');
 	vendLayer.appendChild(vend);
+	
+	var gradient = new lime.fill.LinearGradient().
+        setDirection(0,0,0,1). // 45' angle 
+        addColorStop(0,Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255),1). // start from red color
+        addColorStop(1,Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255),.5); // end with transparent blue
     
     var background = new lime.Sprite().setSize(gameObj.width,gameObj.height*45/50).
-        setFill('#F3E2A9').setAnchorPoint(0,0).setPosition(0,0);
+        setFill(gradient).setAnchorPoint(0,0).setPosition(0,0);
+		
     
     goog.events.listen(vend, ['touchstart', 'mousedown'], function(e) {
         if(gameObj.currentItem) {
@@ -51,7 +58,7 @@ virtual_pet.start = function(e){
     });
     
     var groundArea = new lime.Sprite().setSize(gameObj.width,gameObj.height/5).
-        setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*100/100);
+        setFill('#999999').setPosition(gameObj.width/2,gameObj.height*100/100);
 		
 	var vendArea = new lime.Sprite().setSize(200,400).
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
@@ -68,7 +75,7 @@ virtual_pet.start = function(e){
 	var petMeta = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height-20);
 		gameLayer.appendChild(petMeta);
 	lime.scheduleManager.scheduleWithDelay(function() {
-			petMeta.setText('Happiness: ' + round100(pet.happiness) + '  Health: ' + round100(pet.health) + '  Hunger: ' + round100(pet.hunger) + '  Energy: ' + round100(pet.energy) + '  X:'+ round100(pet.x) + '  Y:'+round100(pet.y));
+			petMeta.setText('Happiness: ' + round100(pet.happiness) + '  Health: ' + round100(pet.health) + '  Hunger: ' + round100(pet.hunger) + '  Energy: ' + round100(pet.energy));
 		}, this, gameObj.dt);
 	//END OF SCHEDULER
     
