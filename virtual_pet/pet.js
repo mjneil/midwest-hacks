@@ -22,9 +22,13 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
 	this.grav = this.gameObj.grav;
-	this.size = 80 + 40 * Math.random();
-	this.height = this.size * 1 + .5 * Math.random();
-	this.width = this.size * .8 + .5 * Math.random();
+	this.size = 60 + 40 * Math.random();
+	this.height = this.size * 1.2 + 1 * Math.random();
+	this.width = this.size * 1 + .5 * Math.random();
+	this.sHeight = this.height;
+	this.sWidth = this.width;
+	
+	this.growth = 1;
 	
 	this.x = this.gameObj.width/2;
 	this.y = this.gameObj.height/2;
@@ -148,8 +152,11 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		this.health = Math.max(this.health - .01, 0);
 		this.energy = Math.max(this.energy + .01, 0);
 		
-		this.age += (.01*(this.happiness + this.hunger + this.health + this.energy) / 4000);
-		this.size
+		this.age += .1;
+		this.growth = Math.min((this.growth + .0001*(this.happiness + this.hunger + this.health + this.energy) / 400) , 1.2);
+		this.height = this.sHeight * this.growth;
+		this.width = this.sWidth * this.growth;
+		
         
         //console.log('happiness:'+this.happiness);
         //console.log('health:'+this.health);
@@ -232,9 +239,9 @@ virtual_pet.Pet.prototype.updateLook = function() {
     this.setSize(this.width,this.height);
     
     //color according to the happiness (between green and red)
-    var redAmount = parseInt((this.happiness)/100*this.colorR);
-    var greenAmount = parseInt((this.happiness)/100*this.colorG);
-	var blueAmount = parseInt((this.happiness)/100*this.colorB); 
+    var redAmount = parseInt((this.health)/100*this.colorR);
+    var greenAmount = parseInt((100-this.health)/100*this.colorG);
+	var blueAmount = parseInt((100-this.health)/100*this.colorB); 
     this.setFill(redAmount,greenAmount, blueAmount);
 };
 
