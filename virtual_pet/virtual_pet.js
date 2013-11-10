@@ -9,6 +9,7 @@ goog.require('lime.Layer');
 goog.require('lime.Circle');
 goog.require('virtual_pet.Pet');
 goog.require('virtual_pet.Item');
+goog.require('virtual_pet.BodyPart');
 
 // entrypoint
 virtual_pet.start = function(){
@@ -34,7 +35,7 @@ virtual_pet.start = function(){
     goog.events.listen(background, ['touchstart', 'mousedown'], function(e) {
         if(gameObj.currentItem) {
             var pos = e.position;
-            var newItem = new virtual_pet.Item(gameObj.currentItem.happiness,gameObj.currentItem.health)
+            var newItem = new virtual_pet.Item(gameObj, pos.x, pos.y , 20, gameObj.currentItem.happiness,gameObj.currentItem.health)
                 .setPosition(pos)
                 .setSize(gameObj.currentItem.width, gameObj.currentItem.height)
                 .setFill(gameObj.currentItem.fill);
