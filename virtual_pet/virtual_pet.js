@@ -31,7 +31,7 @@ virtual_pet.start = function(e){
     var gameLayer = new lime.Layer();
 	var vendLayer = new lime.Layer();
 	
-	var vend = new virtual_pet.Vend(200,300,gameObj).setAnchorPoint(0,1).setSize(200,300).setPosition(gameObj.width/10,gameObj.ground).setFill('#000000');
+	var vend = new virtual_pet.Vend(200,300,gameObj).setAnchorPoint(0,1).setSize(200,300).setPosition(gameObj.width/10,gameObj.ground).setFill('images\/vending.svg');
 	vendLayer.appendChild(vend);
     
     var background = new lime.Sprite().setSize(gameObj.width,gameObj.height*4/5).

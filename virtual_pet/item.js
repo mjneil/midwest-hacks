@@ -26,7 +26,6 @@ virtual_pet.Item = function(gameObj, x, y, dx, size, happiness, health, hunger, 
 	this.width = this.size;
 	
 	var dt = this.gameObj.dt;
-    var i, arrayLen, toRemove;
     lime.scheduleManager.scheduleWithDelay(function() {
 	
 		this.grounded = this.y + (this.height / 2)  >= this.groundY;

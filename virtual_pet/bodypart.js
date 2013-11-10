@@ -1,13 +1,13 @@
 goog.provide('virtual_pet.BodyPart');
 goog.require('lime.RoundedRect');
 
-virtual_pet.BodyPart = function(gameObj, gameLayer, pet, width, height, x, y, angle) {
+virtual_pet.BodyPart = function(gameObj, gameLayer, pet, width, height, x, y, angle, animates) {
 	goog.base(this);
 	
 	this.gameObj = gameObj;
     this.gameLayer = gameLayer;
 	this.pet = pet;
-	
+	this.animates = animates;
 	this.height = height;
 	this.width = width
 	this.x = x;
