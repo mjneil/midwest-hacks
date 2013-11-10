@@ -28,26 +28,83 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         
     this.setPosition(this.x, this.y);
     this.updateLook();
+	this.eyeTexture = {
+		angry: 'images/eyes1_angry.svg',
+		happy: 'images/eyes1_happy.svg',
+		none: 'images/eyes1_none.svg',
+		sad: 'images/eyes1_sad.svg'
+	};
+	this.mouthTexture = {
+		angry: 'images/mouth1_angry.svg',
+		happy: 'images/mouth1_happy.svg',
+		none: 'images/mouth1_none.svg',
+		sad: 'images/mouth1_sad.svg'
+	};
+	this.earTexture = 'images/ear1.svg';
+	//Randomizes facial features
+	var faceRand = Math.floor(Math.random()*100);
+	if(faceRand > 50){
+		this.eyeTexture = {
+			angry: 'images/eyes2_angry.svg',
+			happy: 'images/eyes2_happy.svg',
+			none: 'images/eyes2_none.svg',
+			sad: 'images/eyes2_sad.svg'
+		};
+	}
+	faceRand = Math.floor(Math.random()*100);
+	if(faceRand > 50){
+		this.mouthTexture = {
+			angry: 'images/mouth2_angry.svg',
+			happy: 'images/mouth2_happy.svg',
+			none: 'images/mouth2_none.svg',
+			sad: 'images/mouth2_sad.svg'
+		};
+	}
+	faceRand = Math.floor(Math.random()*100);
+	if(faceRand > 33){
+		if(faceRand > 66){
+			this.earTexture = 'images/ear2.svg';
+		}else{
+			this.earTexture = 'images/ear3.svg';
+		}
+	}
 	
 	this.parts = [];
-
-	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.4, 0, -(this.height/2), 0, 0,1).setAnchorPoint(0.5,1);
+	this.headParts = [];
+	
+	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*1.5, this.width*.8, 0, -(this.height/2-10), 0, 0,1).setRadius(30).setAnchorPoint(0.5,1);
 	this.appendChild(head);
 	this.parts.push(head);
 	
-	var armLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, -(this.width/2) + 10, -(this.height/4), 45, 1,1).setAnchorPoint(1,.5);
+	var eyes = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, 0, -head.height*.6, 0, 0, 0).setFill(this.eyeTexture.none).setScale(1.8);
+	head.appendChild(eyes);
+	this.headParts.push(eyes);
+	
+	var mouth = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, 0, -head.height*.3, 0, 0, 0).setFill(this.mouthTexture.none);
+	head.appendChild(mouth);
+	this.headParts.push(mouth);
+	
+	var earRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, head.width/2+8, -head.height-22, 0, 0, 0).setFill(this.earTexture);
+	head.appendChild(earRight);
+	this.headParts.push(earRight);
+	
+	var earLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, -head.width/2-8, -head.height-22, 0, 0, 0).setFill(this.earTexture).setScale(-1,1);
+	head.appendChild(earLeft);
+	this.headParts.push(earLeft);
+	
+	var armLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, -(this.width/2) + 10, -(this.height/4), 45, 1,1).setAnchorPoint(1,.5).setRadius(30);
 	this.appendChild(armLeft);
 	this.parts.push(armLeft);
 	
-	var armRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, (this.width/2) - 10, -(this.height/4), -45, 1,-1).setAnchorPoint(0,.5);
+	var armRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, (this.width/2) - 10, -(this.height/4), -45, 1,-1).setAnchorPoint(0,.5).setRadius(30);
 	this.appendChild(armRight);
 	this.parts.push(armRight);
 	
-	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, -(this.width/2) + 10, (this.height/2), 0, 1,1).setAnchorPoint(1,1);
+	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, -(this.width/2) + 10, (this.height/2), 0, 1,1).setAnchorPoint(1,1).setRadius(30);
 	this.appendChild(legLeft);
 	this.parts.push(legLeft);
 	
-	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, (this.width/2) - 10, (this.height/2), 0, 1,-1).setAnchorPoint(0,1);
+	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, (this.width/2) - 10, (this.height/2), 0, 1,-1).setAnchorPoint(0,1).setRadius(30);
 	this.appendChild(legRight);
 	this.parts.push(legRight);
 	

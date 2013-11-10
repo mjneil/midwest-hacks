@@ -62,7 +62,7 @@ virtual_pet.start = function(e){
 	
     
     //create pet
-    var pet = new virtual_pet.Pet(gameObj, gameLayer);
+    var pet = new virtual_pet.Pet(gameObj, gameLayer).setRadius(30);
     gameLayer.appendChild(pet);
 	
 	var petMeta = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height-20);
