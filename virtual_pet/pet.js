@@ -67,7 +67,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         this.happiness = Math.max(this.happiness - .01, 0);
         this.hunger = Math.max(this.hunger - .01, 0);
 		this.health = Math.max(this.health - .01, 0);
-		this.energy = Math.max(this.energy - .01, 0);
+		this.energy = Math.max(this.energy + .01, 0);
         
         //console.log('happiness:'+this.happiness);
         //console.log('health:'+this.health);
@@ -96,6 +96,10 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
             this.gameObj.items.splice(toRemove[i-1],1);
         }
 		
+		if(this.x > gameObj.width || this.x < 0){
+			this.dx *= -1;
+		}
+		
 		this.x += this.dx;
 		this.y = Math.min(this.y += this.dy, this.groundY - (this.height / 2));
 		this.setPosition(this.x, this.y);
@@ -112,16 +116,18 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     goog.events.listen(this,['mousedown','touchstart'],function(e){
 			var pos = e.position;
 			console.log('x: ' + pos.x + '  y: ' + pos.y);
-            this.happiness = Math.min(this.happiness+5,100);
-			this.energy = Math.max(this.energy-5,0);
-			if(this.grounded)
-			{
-				this.dy -= 10;
-				if(pos.x < 0){
-					this.dx += (this.x)/100;
-				}
-				else{
-					this.dx -= (this.x)/100;
+			if(this.energy >= 5){
+				this.happiness = Math.min(this.happiness+5,100);
+				this.energy = Math.max(this.energy-5,0);
+				if(this.grounded)
+				{
+					this.dy -= 10;
+					if(pos.x < 0){
+						this.dx += (this.x)/100;
+					}
+					else{
+						this.dx -= (this.x)/100;
+					}
 				}
 			}
     });

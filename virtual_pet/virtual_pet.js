@@ -37,11 +37,11 @@ virtual_pet.start = function(e){
     var background = new lime.Sprite().setSize(gameObj.width,gameObj.height*4/5).
         setFill('#F3E2A9').setAnchorPoint(0,0).setPosition(0,0);
     
-    goog.events.listen(background, ['touchstart', 'mousedown'], function(e) {
+    goog.events.listen(vend, ['touchstart', 'mousedown'], function(e) {
         if(gameObj.currentItem) {
             var pos = e.position;
-            var newItem = new virtual_pet.Item(gameObj, pos.x, pos.y , 45, gameObj.currentItem.happiness,gameObj.currentItem.health, gameObj.currentItem.hunger,gameObj.currentItem.energy)
-                .setSize(gameObj.currentItem.width, gameObj.currentItem.height)
+            var newItem = new virtual_pet.Item(gameObj, gameObj.width/10 + 100, 50, Math.floor((Math.random()*20)+20), 45, gameObj.currentItem.happiness,gameObj.currentItem.health, gameObj.currentItem.hunger,gameObj.currentItem.energy)
+                .setSize(gameObj.currentItem.height, gameObj.currentItem.height)
                 .setFill(gameObj.currentItem.fill);
             gameLayer.appendChild(newItem);
             gameObj.items.push(newItem);           
@@ -56,66 +56,18 @@ virtual_pet.start = function(e){
 	var vendArea = new lime.Sprite().setSize(200,400).
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
     
-    var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
-        setPosition(gameObj.width/4,gameObj.height/10).setFill('images/apple.png');
     
-    goog.events.listen(appleButton, ['touchstart', 'mousedown'], function(e) {
-        e.stopPropagation();
-        gameObj.currentItem = {
-            width: gameObj.height/10,
-            height: gameObj.height/10,
-            fill: 'images/apple.png',
-            happiness: -5,
-            health: 20,
-			hunger: 15,
-			energy: 15
-        };
-    });
     
-    var icecreamButton = new lime.Sprite().setSize(gameObj.height/20,gameObj.height/10).
-        setPosition(gameObj.width/2,gameObj.height/10).setFill('images/icecream.png');
     
-    goog.events.listen(icecreamButton, ['touchstart', 'mousedown'], function(e) {
-        e.stopPropagation();
-        gameObj.currentItem = {
-            width: gameObj.height/20,
-            height: gameObj.height/10,
-            fill: 'images/icecream.png',
-            happiness: 20,
-            health: -10,
-			hunger: 5,
-			energy: 10
-        };
-    });
-    
-    var toyButton = new lime.Sprite().setSize(gameObj.height/15,gameObj.height/10).
-        setPosition(gameObj.width*3/4,gameObj.height/10).setFill('images/toy.png');
-    
-    goog.events.listen(toyButton, ['touchstart', 'mousedown'], function(e) {
-        e.stopPropagation();
-        gameObj.currentItem = {
-            width: gameObj.height/15,
-            height: gameObj.height/10,
-            fill: 'images/toy.png',
-            happiness: 10,
-            health: 0,
-			hunger: 0,
-			energy: -10
-        };
-    });
-    
-    gameLayer.appendChild(background);    
-    gameLayer.appendChild(groundArea);    
-    gameLayer.appendChild(appleButton);    
-    gameLayer.appendChild(icecreamButton);    
-    gameLayer.appendChild(toyButton);    
+    gameScene.appendChild(background,0);    
+    gameLayer.appendChild(groundArea);   
+	gameScene.appendChild(vendLayer);   
     gameScene.appendChild(gameLayer);
-	gameScene.appendChild(vendLayer);
+	
     
     //create pet
     var pet = new virtual_pet.Pet(gameObj, gameLayer);
     gameLayer.appendChild(pet);
-	
 	
 	var petMeta = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height*(9/10));
 		gameLayer.appendChild(petMeta);

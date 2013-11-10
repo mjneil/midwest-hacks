@@ -1,12 +1,12 @@
 goog.provide('virtual_pet.Item');
 goog.require('lime.Sprite');
 
-virtual_pet.Item = function(gameObj, x, y, size, happiness, health, hunger, energy) {
+virtual_pet.Item = function(gameObj, x, y, dx, size, happiness, health, hunger, energy) {
     goog.base(this);
 	
     this.gameObj = gameObj;
 	
-	this.dx = 0;
+	this.dx = dx;
 	this.dy = 0;
 	
 	this.x = x;
@@ -38,8 +38,13 @@ virtual_pet.Item = function(gameObj, x, y, size, happiness, health, hunger, ener
 		//friction
 		if(this.grounded)this.dx = this.dx / 2;
 		
+		if(this.x > gameObj.width || this.x < 0){
+			this.dx *= -1;
+		}
+		
 		this.x += this.dx;
 		this.y = Math.min(this.y += this.dy, this.groundY - (this.height / 2));
+		
 		this.setPosition(this.x, this.y);
 		
     }, this, dt);
