@@ -14,7 +14,7 @@ goog.require('virtual_pet.Item');
 virtual_pet.start = function(){
     //object to store game-level properties
     var gameObj = {
-        width: 320,
+        width: 1000,
         height: 480,
         renderer: lime.Renderer.DOM,
         maxPetSize: 200,
@@ -36,10 +36,7 @@ virtual_pet.start = function(){
                 .setSize(gameObj.currentItem.width, gameObj.currentItem.height)
                 .setFill(gameObj.currentItem.fill);
             gameLayer.appendChild(newItem);
-            gameObj.items.push(newItem);    
-            
-            var movement = new lime.animation.MoveTo(e.position.x,e.position.y).setDuration(2);
-            pet.runAction(movement);            
+            gameObj.items.push(newItem);           
             
             gameObj.currentItem = null;
         }
@@ -103,6 +100,7 @@ virtual_pet.start = function(){
     
     director.makeMobileWebAppCapable();
     director.replaceScene(gameScene);
+	
 
 }
 
