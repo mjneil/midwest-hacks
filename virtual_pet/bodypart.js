@@ -15,15 +15,15 @@ virtual_pet.BodyPart = function(gameObj, gameLayer, pet, width, height, x, y, an
 	this.angle = angle;
 	
 	this.setPosition(this.x,this.y);
-	this.updateLook();
+	this.updatePart();
 }
 
-goog.inherits(virtual_pet.Pet,lime.RoundedRect);
+goog.inherits(virtual_pet.BodyPart,lime.RoundedRect);
 
 /**
  * update the part's look according to it's happiness and health
  */
-virtual_pet.BodyPart.prototype.updateLook = function() {
+virtual_pet.BodyPart.prototype.updatePart = function() {
     this.setSize(this.width,this.height);
     
     //color according to the happiness (between green and red)

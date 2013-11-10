@@ -29,9 +29,11 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     this.setPosition(this.x, this.y);
     this.updateLook();
 	
+	this.parts = [];
 
-	//var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this.pet, this.width*.8, this.width*.4, this.x, this.y-200, 0);
-	//this.appendChild(head);
+	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.4, 0, -(this.height/2)-this.width*.4, 0);
+	this.appendChild(head);
+	this.parts.push(head);
 	
     var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
@@ -81,6 +83,9 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		this.setPosition(this.x, this.y);
 		
 		this.updateLook();
+		for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
+			this.parts[i].updatePart();
+		}
 		
     }, this, dt);
 	//END OF SCHEDULER
