@@ -57,14 +57,14 @@ virtual_pet.start = function(e){
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
     
     var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
-        setPosition(gameObj.width/4,gameObj.height/10).setFill('images/apple.png');
+        setPosition(gameObj.width/4,gameObj.height/10).setFill('images/berry1.svg');
     
     goog.events.listen(appleButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
         gameObj.currentItem = {
             width: gameObj.height/10,
             height: gameObj.height/10,
-            fill: 'images/apple.png',
+            fill: 'images/berry1.svg',
             happiness: -5,
             health: 20,
 			hunger: 15,
@@ -73,14 +73,14 @@ virtual_pet.start = function(e){
     });
     
     var icecreamButton = new lime.Sprite().setSize(gameObj.height/20,gameObj.height/10).
-        setPosition(gameObj.width/2,gameObj.height/10).setFill('images/icecream.png');
+        setPosition(gameObj.width/2,gameObj.height/10).setFill('images/berry2.svg');
     
     goog.events.listen(icecreamButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
         gameObj.currentItem = {
             width: gameObj.height/20,
             height: gameObj.height/10,
-            fill: 'images/icecream.png',
+            fill: 'images/berry2.svg',
             happiness: 20,
             health: -10,
 			hunger: 5,
@@ -89,14 +89,14 @@ virtual_pet.start = function(e){
     });
     
     var toyButton = new lime.Sprite().setSize(gameObj.height/15,gameObj.height/10).
-        setPosition(gameObj.width*3/4,gameObj.height/10).setFill('images/toy.png');
+        setPosition(gameObj.width*3/4,gameObj.height/10).setFill('images/berry3.svg');
     
     goog.events.listen(toyButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
         gameObj.currentItem = {
             width: gameObj.height/15,
             height: gameObj.height/10,
-            fill: 'images/toy.png',
+            fill: 'images/berry3.svg',
             happiness: 10,
             health: 0,
 			hunger: 0,
