@@ -49,7 +49,7 @@ virtual_pet.start = function(e){
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
 		
 	var vendArea = new lime.Sprite().setSize(200,400).
-        setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10)
+        setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
     
     var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
         setPosition(gameObj.width/4,gameObj.height/10).setFill('images/apple.png');
