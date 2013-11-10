@@ -28,8 +28,7 @@ goog.inherits(virtual_pet.BodyPart,lime.RoundedRect);
 virtual_pet.BodyPart.prototype.updatePart = function() {
     this.setSize(this.width,this.height);
 	if(this.animates != 0){
-		var flingRand = Math.floor(Math.random()*2) == 1 ? 1 : -1; 	
-   		this.setRotation(this.angle + this.animateAmount*this.facing + this.pet.dx*5 - this.pet.dy*5*flingRand);
+   		this.setRotation(this.angle + this.animateAmount*this.facing - this.pet.dy*2*this.facing + this.pet.dx*2*this.facing);
 	}
     //color according to the happiness (between green and red)
     var redAmount = parseInt((this.pet.happiness)/100*this.pet.colorR); //255 if 0 health

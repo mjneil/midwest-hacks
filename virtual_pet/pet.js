@@ -105,13 +105,25 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.appendChild(armRight);
 	this.parts.push(armRight);
 	
-	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, -(this.width/2) + 10, (this.height/2), 0, 1,1).setAnchorPoint(1,1).setRadius(30);
-	this.appendChild(legLeft);
+	var pawLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, 0, -45, 1, 0).setFill('images/hand.svg').setScale(-.8,.8);
+	armLeft.appendChild(pawLeft);
+	
+	var pawRight = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, this.width*.8, 0, -45, 1, 0).setFill('images/hand.svg').setScale(.8,.8);
+	armRight.appendChild(pawRight);
+	
+	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.7, this.width*.3, -(this.width/2) + 20, (this.height/2), 0, 1,1).setAnchorPoint(1,1).setRadius(30);
+	this.appendChild(legLeft,0);
 	this.parts.push(legLeft);
 	
-	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, (this.width/2) - 10, (this.height/2), 0, 1,-1).setAnchorPoint(0,1).setRadius(30);
-	this.appendChild(legRight);
+	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.7, this.width*.3, (this.width/2) - 20, (this.height/2), 0, 1,-1).setAnchorPoint(0,1).setRadius(30);
+	this.appendChild(legRight,0);
 	this.parts.push(legRight);
+	
+	var footRight = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, this.width*.8, -this.width*.3, 0, 1, 0).setFill('images\/foot.svg').setScale(.8,.8);
+	legRight.appendChild(footRight);
+	
+	var footLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, -this.width*.3, 0, 1, 0).setFill('images\/foot.svg').setScale(-.8,.8);
+	legLeft.appendChild(footLeft);
 	
     var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
