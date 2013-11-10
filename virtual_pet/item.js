@@ -11,6 +11,7 @@ virtual_pet.Item = function(gameObj, x, y, size, happiness, health, hunger, ener
 	
 	this.x = x;
 	this.y = y;
+	this.setPosition(x,y);
     
     this.happiness = happiness;
     this.health = health;

@@ -24,7 +24,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.x = this.gameObj.width/2;
 	this.y = this.gameObj.height/2;
 	this.dx = 0;
-	this.dy = 1;
+	this.dy = 0;
         
     this.setPosition(this.x, this.y);
     this.updateLook();
@@ -44,7 +44,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		}
 		
 		//friction
-		if(this.grounded)this.dx = this.dx / 2;
+		if(this.grounded)this.dx = this.dx / 1.3;
 		
         this.happiness = Math.max(this.happiness - .01, 0);
         this.hunger = Math.max(this.hunger - .01, 0);
@@ -65,7 +65,9 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         for(i = 0, arrayLen = this.gameObj.items.length; i<arrayLen; i++) {
             if(goog.math.Box.intersects(this.gameObj.items[i].getBoundingBox(), this.getBoundingBox())) {
                 this.happiness = Math.min(this.happiness+this.gameObj.items[i].happiness,100);
-                this.health = Math.min(this.health+this.gameObj.items[i].health,100);
+                this.hunger = Math.min(this.hunger+this.gameObj.items[i].hunger,100);
+				this.health = Math.min(this.health+this.gameObj.items[i].health,100);
+				this.energy = Math.min(this.energy+this.gameObj.items[i].energy,100);
                 toRemove.push(i);
             }
         }
@@ -87,17 +89,14 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     
     //drag it around to make it happier
     goog.events.listen(this,['mousedown','touchstart'],function(e){
-        
-        var pet = this;
-        e.swallow(['mouseup','touchend'],function(){
 			var pos = e.position;
             this.happiness = Math.min(this.happiness+5,100);
+			this.energy = Math.max(this.energy-5,0);
 			if(this.grounded)
 			{
-				this.dy -= (this.y - pos.y)/100;
-				this.dx += (this.x - pos.x)/100;
+				this.dy -= 10;
+				this.dx += (this.x)/100;
 			}
-        });
     });
 	
     

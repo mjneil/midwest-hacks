@@ -12,7 +12,7 @@ goog.require('virtual_pet.Item');
 goog.require('virtual_pet.BodyPart');
 
 // entrypoint
-virtual_pet.start = function(){
+virtual_pet.start = function(e){
     //object to store game-level properties
     var gameObj = {
         width: 1026,
@@ -35,8 +35,7 @@ virtual_pet.start = function(){
     goog.events.listen(background, ['touchstart', 'mousedown'], function(e) {
         if(gameObj.currentItem) {
             var pos = e.position;
-            var newItem = new virtual_pet.Item(gameObj, pos.x, pos.y , 20, gameObj.currentItem.happiness,gameObj.currentItem.health)
-                .setPosition(pos)
+            var newItem = new virtual_pet.Item(gameObj, pos.x, pos.y , 45, gameObj.currentItem.happiness,gameObj.currentItem.hunger, gameObj.currentItem.health,gameObj.currentItem.energy)
                 .setSize(gameObj.currentItem.width, gameObj.currentItem.height)
                 .setFill(gameObj.currentItem.fill);
             gameLayer.appendChild(newItem);
@@ -62,7 +61,9 @@ virtual_pet.start = function(){
             height: gameObj.height/10,
             fill: 'images/apple.png',
             happiness: -5,
-            health: 20
+            health: 20,
+			hunger: 15,
+			energy: 15
         };
     });
     
@@ -76,7 +77,9 @@ virtual_pet.start = function(){
             height: gameObj.height/10,
             fill: 'images/icecream.png',
             happiness: 20,
-            health: -10
+            health: -10,
+			hunger: 5,
+			energy: 10
         };
     });
     
@@ -90,7 +93,9 @@ virtual_pet.start = function(){
             height: gameObj.height/10,
             fill: 'images/toy.png',
             happiness: 10,
-            health: 0
+            health: 0,
+			hunger: 0,
+			energy: -10
         };
     });
     
@@ -105,10 +110,11 @@ virtual_pet.start = function(){
     var pet = new virtual_pet.Pet(gameObj, gameLayer);
     gameLayer.appendChild(pet);
 	
-	var petMeta = new lime.Label().setText('Happiness: ' + pet.happiness + '  Health: ' + pet.health + '  Hunger: ' + pet.hunger + '  Energy: ' + pet.energy).setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height*(9/10));
+	
+	var petMeta = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height*(9/10));
 		gameLayer.appendChild(petMeta);
 	lime.scheduleManager.scheduleWithDelay(function() {
-			petMeta.setText('Happiness: ' + round100(pet.happiness) + '  Health: ' + round100(pet.health) + '  Hunger: ' + round100(pet.hunger) + '  Energy: ' + round100(pet.energy));
+			petMeta.setText('Happiness: ' + round100(pet.happiness) + '  Health: ' + round100(pet.health) + '  Hunger: ' + round100(pet.hunger) + '  Energy: ' + round100(pet.energy) + '  X:'+ round100(pet.x) + '  Y:'+round100(pet.y));
 		}, this, gameObj.dt);
 	//END OF SCHEDULER
     
@@ -119,7 +125,7 @@ virtual_pet.start = function(){
 }
 
 function round100(num) {
-    return Math.ceil(num * 100) / 100;
+    return Math.round(num);
 }
 
 //this is required for outside access after code is compiled in ADVANCED_COMPILATIONS mode
