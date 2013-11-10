@@ -85,6 +85,9 @@ virtual_pet.Vend = function(width, height, gameObj) {
 		active: 1
     });
 	
+	var tube = new lime.Sprite().setAnchorPoint(.5,1).setPosition(this.width/2+12,-this.height+20).setFill('images\/tube.svg').setScale(.25);
+	this.appendChild(tube);
+	
 	for(i = 0; i < 3; i++){
 		for(k = 0; k < 2; k++){
 			var newButton = new lime.Sprite().setAnchorPoint(.5,.5).setPosition((this.width/4 + 50) - this.buttons[2*i+k].width/2 + (k * (this.width/2 -40)),-(this.height-100) + ((this.height/3-45)	*i) + (this.buttons[2*i+k].height/3)).setFill(this.buttons[2*i+k].fill).setScale(this.buttonScale);

@@ -31,28 +31,33 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	
 	this.parts = [];
 
-	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.4, 0, -(this.height/2), 0, 0).setAnchorPoint(0.5,1);
+	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.4, 0, -(this.height/2), 0, 0,1).setAnchorPoint(0.5,1);
 	this.appendChild(head);
 	this.parts.push(head);
 	
-	var armLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, -(this.width/2) + 10, -(this.height/4), 45, 1).setAnchorPoint(1,.5);
+	var armLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, -(this.width/2) + 10, -(this.height/4), 45, 1,1).setAnchorPoint(1,.5);
 	this.appendChild(armLeft);
 	this.parts.push(armLeft);
 	
-	var armRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, (this.width/2) - 10, -(this.height/4), -45, 1).setAnchorPoint(0,.5);
+	var armRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, (this.width/2) - 10, -(this.height/4), -45, 1,-1).setAnchorPoint(0,.5);
 	this.appendChild(armRight);
 	this.parts.push(armRight);
 	
-	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, -(this.width/2) + 10, (this.height/2), 0, 1).setAnchorPoint(1,1);
+	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, -(this.width/2) + 10, (this.height/2), 0, 1,1).setAnchorPoint(1,1);
 	this.appendChild(legLeft);
 	this.parts.push(legLeft);
 	
-	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, (this.width/2) - 10, (this.height/2), 0, 1).setAnchorPoint(0,1);
+	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.6, this.width*.3, (this.width/2) - 10, (this.height/2), 0, 1,-1).setAnchorPoint(0,1);
 	this.appendChild(legRight);
 	this.parts.push(legRight);
 	
     var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
+	this.startTime = [];
+	for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
+		this.startTime[i] = new Date().getTime();
+	}
+	
     lime.scheduleManager.scheduleWithDelay(function() {
 	
 		this.grounded = this.y + (this.height / 2)  >= this.groundY;
@@ -106,6 +111,12 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		
 		this.updateLook();
 		for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
+			
+			if(this.parts[i].animates != 0){
+				//if((new Date().getTime() - this.startTime[i]) > (this.gameObj.dt*5)){
+					this.parts[i].animateAmount = Math.sin((new Date().getTime() - this.startTime[i])*this.gameObj.dt/4000)*5;
+				//}
+			}
 			this.parts[i].updatePart();
 		}
 		
@@ -118,15 +129,15 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 			console.log('x: ' + pos.x + '  y: ' + pos.y);
 			if(this.energy >= 5){
 				this.happiness = Math.min(this.happiness+5,100);
-				this.energy = Math.max(this.energy-5,0);
+				this.energy = Math.max(this.energy-2,0);
 				if(this.grounded)
 				{
-					this.dy -= 10;
+					this.dy -= 10 + 50/Math.max(Math.abs(pos.x),5);
 					if(pos.x < 0){
-						this.dx += (this.x)/100;
+						this.dx += Math.min(Math.abs(pos.x),20);
 					}
 					else{
-						this.dx -= (this.x)/100;
+						this.dx -= Math.min(Math.abs(pos.x),20);
 					}
 				}
 			}
