@@ -6,11 +6,16 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     
     this.gameObj = gameObj;
     this.gameLayer = gameLayer;
-    this.happiness = 100;
-    this.health = 100;
+	
+    this.happiness = 75;
+    this.health = 75;
+	this.hunger = 75;
+	this.energy = 75;
+	
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
-	this.grav = 1;
+	this.grav = this.gameObj.grav;
+	this.size = 200;
 	
 	this.x = this.gameObj.width/2;
 	this.y = this.gameObj.height/2;
@@ -24,13 +29,14 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     var i, arrayLen, toRemove;
     lime.scheduleManager.scheduleWithDelay(function() {
 	
-		this.grounded = this.
+		this.grounded = this.y + (this.size / 2)  > this.groundY;
 		if(!this.grounded) this.dy += this.grav;
 		else this.dy = 0;
 		
-		
-        this.happiness -= 0.02;
-        this.health -= 0.01;
+        this.happiness = Math.max(this.happiness - .01, 0);
+        this.hunger = Math.max(this.hunger - .01, 0);
+		this.health = Math.max(this.health - .01, 0);
+		this.energy = Math.max(this.energy - .01, 0);
         
         //console.log('happiness:'+this.happiness);
         //console.log('health:'+this.health);
@@ -84,9 +90,7 @@ goog.inherits(virtual_pet.Pet,lime.Circle);
  * update the pet's look according to it's happiness and health
  */
 virtual_pet.Pet.prototype.updateLook = function() {
-    //size of the pet according to the health
-    var petSize = this.gameObj.maxPetSize * this.health/100;
-    this.setSize(petSize, petSize);
+    this.setSize(this.size, this.size);
     
     //color according to the happiness (between green and red)
     var redAmount = parseInt((100-this.happiness)/100*255); //255 if 0 health
