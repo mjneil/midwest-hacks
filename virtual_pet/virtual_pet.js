@@ -14,11 +14,13 @@ goog.require('virtual_pet.Item');
 virtual_pet.start = function(){
     //object to store game-level properties
     var gameObj = {
-        width: 320,
+        width: 1026,
         height: 480,
-        renderer: lime.Renderer.DOM,
+        renderer: lime.Renderer.CANVAS,
         maxPetSize: 200,
-        items: []
+        items: [],
+		ground: 480*8/10,
+		grav: 0.981
     };
     
     var director = new lime.Director(document.body,gameObj.width,gameObj.height);
@@ -45,7 +47,7 @@ virtual_pet.start = function(){
         }
     });
     
-    var menuArea = new lime.Sprite().setSize(gameObj.width,gameObj.height/5).
+    var groundArea = new lime.Sprite().setSize(gameObj.width,gameObj.height/5).
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10)
     
     var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
@@ -91,7 +93,7 @@ virtual_pet.start = function(){
     });
     
     gameLayer.appendChild(background);    
-    gameLayer.appendChild(menuArea);    
+    gameLayer.appendChild(groundArea);    
     gameLayer.appendChild(appleButton);    
     gameLayer.appendChild(icecreamButton);    
     gameLayer.appendChild(toyButton);    
