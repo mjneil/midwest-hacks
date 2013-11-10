@@ -95,12 +95,18 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     //drag it around to make it happier
     goog.events.listen(this,['mousedown','touchstart'],function(e){
 			var pos = e.position;
+			console.log('x: ' + pos.x + '  y: ' + pos.y);
             this.happiness = Math.min(this.happiness+5,100);
 			this.energy = Math.max(this.energy-5,0);
 			if(this.grounded)
 			{
 				this.dy -= 10;
-				this.dx += (this.x)/100;
+				if(pos.x < 0){
+					this.dx += (this.x)/100;
+				}
+				else{
+					this.dx -= (this.x)/100;
+				}
 			}
     });
 	
