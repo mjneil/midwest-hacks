@@ -1,5 +1,6 @@
 goog.provide('virtual_pet.Pet');
 goog.require('lime.Circle');
+goog.require('lime.RoundedRect');
 
 virtual_pet.Pet = function(gameObj, gameLayer) {
     goog.base(this);
@@ -11,6 +12,8 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     this.health = 75;
 	this.hunger = 75;
 	this.energy = 75;
+	
+	this.shape = new lime.RoundedRect(
 	
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
@@ -84,7 +87,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     
 };
 
-goog.inherits(virtual_pet.Pet,lime.Circle);
+goog.inherits(virtual_pet.Pet,lime.RoundedRect);
 
 /**
  * update the pet's look according to it's happiness and health
