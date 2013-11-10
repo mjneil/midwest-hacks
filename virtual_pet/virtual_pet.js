@@ -101,10 +101,11 @@ virtual_pet.start = function(){
     var pet = new virtual_pet.Pet(gameObj, gameLayer);
     gameLayer.appendChild(pet);
 	
-	//lime.scheduleManager.scheduleWithDelay(function() {
-		var petMeta = new lime.Label().setText('Happiness: ' + pet.happiness + '  Health: ' + pet.health + '  Hunger: ' + pet.hunger + '  Energy: ' + pet.energy).setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/4, gameObj.height*(9/10));
+	var petMeta = new lime.Label().setText('Happiness: ' + pet.happiness + '  Health: ' + pet.health + '  Hunger: ' + pet.hunger + '  Energy: ' + pet.energy).setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height*(9/10));
 		gameLayer.appendChild(petMeta);
-	//}, this, objGame.dt);
+	lime.scheduleManager.scheduleWithDelay(function() {
+			petMeta.setText('Happiness: ' + round100(pet.happiness) + '  Health: ' + round100(pet.health) + '  Hunger: ' + round100(pet.hunger) + '  Energy: ' + round100(pet.energy));
+		}, this, gameObj.dt);
 	//END OF SCHEDULER
     
     director.makeMobileWebAppCapable();
@@ -113,6 +114,9 @@ virtual_pet.start = function(){
 
 }
 
+function round100(num) {
+    return Math.ceil(num * 100) / 100;
+}
 
 //this is required for outside access after code is compiled in ADVANCED_COMPILATIONS mode
 goog.exportSymbol('virtual_pet.start', virtual_pet.start);
