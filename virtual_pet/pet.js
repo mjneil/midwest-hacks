@@ -8,15 +8,29 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     this.gameLayer = gameLayer;
     this.happiness = 100;
     this.health = 100;
+	this.grounded = false;
+	this.groundY = this.gameObj.ground;
+	this.grav = 1;
+	
+	this.x = this.gameObj.width/2;
+	this.y = this.gameObj.height/2;
+	this.dx = 0;
+	this.dy = 1;
         
-    this.setPosition(this.gameObj.width/2, this.gameObj.height/2);
+    this.setPosition(this.x, this.y);
     this.updateLook();
     
-    var dt = 100;
+    var dt = 10;
     var i, arrayLen, toRemove;
     lime.scheduleManager.scheduleWithDelay(function() {
-        this.happiness -= 0.2;
-        this.health -= 0.1;
+	
+		this.grounded = this.
+		if(!this.grounded) this.dy += this.grav;
+		else this.dy = 0;
+		
+		
+        this.happiness -= 0.02;
+        this.health -= 0.01;
         
         //console.log('happiness:'+this.happiness);
         //console.log('health:'+this.health);
@@ -42,8 +56,15 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
             this.gameLayer.removeChild(this.gameObj.items[toRemove[i-1]]);
             this.gameObj.items.splice(toRemove[i-1],1);
         }
-        this.updateLook();
+		
+		this.x += this.dx;
+		this.y += this.dy;
+		this.setPosition(this.x, this.y);
+		
+		this.updateLook();
+		
     }, this, dt);
+	//END OF SCHEDULER
     
     //drag it around to make it happier
     goog.events.listen(this,['mousedown','touchstart'],function(e){
@@ -54,8 +75,6 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
             this.happiness = Math.min(this.happiness+5,100);
         });
     });
-    
-
     
 };
 

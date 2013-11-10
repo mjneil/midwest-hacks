@@ -38,10 +38,7 @@ virtual_pet.start = function(){
                 .setSize(gameObj.currentItem.width, gameObj.currentItem.height)
                 .setFill(gameObj.currentItem.fill);
             gameLayer.appendChild(newItem);
-            gameObj.items.push(newItem);    
-            
-            var movement = new lime.animation.MoveTo(e.position.x,e.position.y).setDuration(2);
-            pet.runAction(movement);            
+            gameObj.items.push(newItem);           
             
             gameObj.currentItem = null;
         }
@@ -105,6 +102,7 @@ virtual_pet.start = function(){
     
     director.makeMobileWebAppCapable();
     director.replaceScene(gameScene);
+	
 
 }
 
