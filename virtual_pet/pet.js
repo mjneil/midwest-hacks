@@ -12,8 +12,6 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.hunger = 75;
 	this.energy = 75;
 	
-	this.shape = new lime.RoundedRect(
-	
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
 	this.grav = this.gameObj.grav;
