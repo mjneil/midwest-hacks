@@ -12,7 +12,7 @@ virtual_pet.BodyPart = function(gameObj, gameLayer, pet, width, height, x, y, an
 	this.width = width
 	this.x = x;
 	this.y = y;
-	this.angle = angle;
+	this.angle = this.setRotation(angle);
 	
 	this.setPosition(this.x,this.y);
 	this.updatePart();
