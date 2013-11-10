@@ -67,7 +67,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         this.happiness = Math.max(this.happiness - .01, 0);
         this.hunger = Math.max(this.hunger - .01, 0);
 		this.health = Math.max(this.health - .01, 0);
-		this.energy = Math.max(this.energy - .01, 0);
+		this.energy = Math.max(this.energy + .01, 0);
         
         //console.log('happiness:'+this.happiness);
         //console.log('health:'+this.health);
