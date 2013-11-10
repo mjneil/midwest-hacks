@@ -14,7 +14,7 @@
    id="svg5371"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="ear1.svg">
+   sodipodi:docname="ear2.svg">
   <defs
      id="defs5373" />
   <sodipodi:namedview
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -53,8 +53,8 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:#c8b7b7;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 0.98841699,61.281853 c 0,0 17.05019301,-58.6872584 38.67181501,-58.8108105 C 61.281853,2.3474903 61.405405,17.791506 56.586873,24.339768 51.76834,30.888031 14.084942,63.258687 9.019305,63.382239 c -5.065637,0.123553 -7.6602316,0 -7.9073359,-1.111969 C 0.86486486,61.158301 0.98841699,61.281853 0.98841699,61.281853 z"
+       style="fill:#a05a2c;stroke:none"
+       d="m 4.6953741,57.622985 c 0,0 17.2673879,-57.37865211 39.1644369,-57.49944927 C 65.756859,0.00273847 65.881986,15.102384 61.002073,21.504633 c -4.879914,6.40225 -43.043343,38.051106 -48.17351,38.171903 -5.1301649,0.120798 -7.7578108,0 -8.0080629,-1.087175 -0.2502519,-1.087173 -0.125126,-0.966376 -0.125126,-0.966376 z"
        id="path5935"
        inkscape:connector-curvature="0" />
     <path

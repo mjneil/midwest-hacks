@@ -32,7 +32,8 @@ virtual_pet.BodyPart.prototype.updatePart = function() {
    		this.setRotation(this.angle + this.animateAmount*this.facing + this.pet.dx*5 - this.pet.dy*5*flingRand);
 	}
     //color according to the happiness (between green and red)
-    var redAmount = parseInt((100-this.pet.happiness)/100*255); //255 if 0 health
-    var greenAmount = parseInt((this.pet.happiness)/100*255); //255 if 100 health
-    this.setFill(redAmount,greenAmount, 0);
+    var redAmount = parseInt((this.pet.happiness)/100*this.pet.colorR); //255 if 0 health
+    var greenAmount = parseInt((this.pet.happiness)/100*this.pet.colorG); //255 if 100 health
+	var blueAmount = parseInt((this.pet.happiness)/100*this.pet.colorB);
+    this.setFill(redAmount,greenAmount, blueAmount);
 };
