@@ -20,7 +20,8 @@ virtual_pet.start = function(){
         maxPetSize: 200,
         items: [],
 		ground: 480*8/10,
-		grav: 0.981
+		grav: 0.981,
+		dt: 10
     };
     
     var director = new lime.Director(document.body,gameObj.width,gameObj.height);
@@ -48,7 +49,7 @@ virtual_pet.start = function(){
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10)
     
     var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
-        setPosition(gameObj.width/4,gameObj.height*9/10).setFill('images/apple.png');
+        setPosition(gameObj.width/4,gameObj.height/10).setFill('images/apple.png');
     
     goog.events.listen(appleButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
@@ -62,7 +63,7 @@ virtual_pet.start = function(){
     });
     
     var icecreamButton = new lime.Sprite().setSize(gameObj.height/20,gameObj.height/10).
-        setPosition(gameObj.width/2,gameObj.height*9/10).setFill('images/icecream.png');
+        setPosition(gameObj.width/2,gameObj.height/10).setFill('images/icecream.png');
     
     goog.events.listen(icecreamButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
@@ -76,7 +77,7 @@ virtual_pet.start = function(){
     });
     
     var toyButton = new lime.Sprite().setSize(gameObj.height/15,gameObj.height/10).
-        setPosition(gameObj.width*3/4,gameObj.height*9/10).setFill('images/toy.png');
+        setPosition(gameObj.width*3/4,gameObj.height/10).setFill('images/toy.png');
     
     goog.events.listen(toyButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
@@ -99,6 +100,12 @@ virtual_pet.start = function(){
     //create pet
     var pet = new virtual_pet.Pet(gameObj, gameLayer);
     gameLayer.appendChild(pet);
+	
+	//lime.scheduleManager.scheduleWithDelay(function() {
+		var petMeta = new lime.Label().setText('Happiness: ' + pet.happiness + '  Health: ' + pet.health + '  Hunger: ' + pet.hunger + '  Energy: ' + pet.energy).setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/4, gameObj.height*(9/10));
+		gameLayer.appendChild(petMeta);
+	//}, this, objGame.dt);
+	//END OF SCHEDULER
     
     director.makeMobileWebAppCapable();
     director.replaceScene(gameScene);

@@ -1,5 +1,4 @@
 goog.provide('virtual_pet.Pet');
-goog.require('lime.Circle');
 goog.require('lime.RoundedRect');
 
 virtual_pet.Pet = function(gameObj, gameLayer) {
@@ -28,7 +27,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     this.setPosition(this.x, this.y);
     this.updateLook();
     
-    var dt = 10;
+    var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
     lime.scheduleManager.scheduleWithDelay(function() {
 	
