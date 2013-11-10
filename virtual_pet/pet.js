@@ -1,5 +1,5 @@
 goog.provide('virtual_pet.Pet');
-goog.require('lime.Circle');
+goog.require('lime.RoundedRect');
 
 virtual_pet.Pet = function(gameObj, gameLayer) {
     goog.base(this);
@@ -25,7 +25,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     this.setPosition(this.x, this.y);
     this.updateLook();
     
-    var dt = 10;
+    var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
     lime.scheduleManager.scheduleWithDelay(function() {
 	
@@ -84,7 +84,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
     
 };
 
-goog.inherits(virtual_pet.Pet,lime.Circle);
+goog.inherits(virtual_pet.Pet,lime.RoundedRect);
 
 /**
  * update the pet's look according to it's happiness and health

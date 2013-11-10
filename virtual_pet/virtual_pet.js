@@ -20,7 +20,8 @@ virtual_pet.start = function(){
         maxPetSize: 200,
         items: [],
 		ground: 480*8/10,
-		grav: 0.981
+		grav: 0.981,
+		dt: 10
     };
     
     var director = new lime.Director(document.body,gameObj.width,gameObj.height);
@@ -99,6 +100,12 @@ virtual_pet.start = function(){
     //create pet
     var pet = new virtual_pet.Pet(gameObj, gameLayer);
     gameLayer.appendChild(pet);
+	
+	//lime.scheduleManager.scheduleWithDelay(function() {
+		var petMeta = new lime.Label().setText('Happiness: ' + pet.happiness + '  Health: ' + pet.health + '  Hunger: ' + pet.hunger + '  Energy: ' + pet.energy).setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/4, gameObj.height*(9/10));
+		gameLayer.appendChild(petMeta);
+	//}, this, objGame.dt);
+	//END OF SCHEDULER
     
     director.makeMobileWebAppCapable();
     director.replaceScene(gameScene);
