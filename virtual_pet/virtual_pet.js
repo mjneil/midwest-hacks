@@ -55,13 +55,9 @@ virtual_pet.start = function(e){
 		
 	var vendArea = new lime.Sprite().setSize(200,400).
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
-    
-    
-    
-    
     gameScene.appendChild(background,0);    
     gameLayer.appendChild(groundArea);   
-	gameScene.appendChild(vendLayer);   
+	gameScene.appendChild(vendLayer);  
     gameScene.appendChild(gameLayer);
 	
     
