@@ -46,6 +46,9 @@ virtual_pet.start = function(){
     });
     
     var groundArea = new lime.Sprite().setSize(gameObj.width,gameObj.height/5).
+        setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10);
+		
+	var vendArea = new lime.Sprite().setSize(200,400).
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10)
     
     var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
