@@ -81,6 +81,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
             this.happiness = Math.min(this.happiness+5,100);
         });
     });
+	
     
 };
 
@@ -97,4 +98,5 @@ virtual_pet.Pet.prototype.updateLook = function() {
     var greenAmount = parseInt((this.happiness)/100*255); //255 if 100 health
     this.setFill(redAmount,greenAmount, 0);
 };
+
 
