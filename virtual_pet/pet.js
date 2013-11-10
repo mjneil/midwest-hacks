@@ -15,7 +15,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
 	this.grav = this.gameObj.grav;
-	this.size = 200;
+	this.size = 100;
 	
 	this.x = this.gameObj.width/2;
 	this.y = this.gameObj.height/2;
@@ -31,7 +31,10 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	
 		this.grounded = this.y + (this.size / 2)  > this.groundY;
 		if(!this.grounded) this.dy += this.grav;
-		else this.dy = 0;
+		else {
+			this.dy = 0;
+			this.y = this.groundY - (this.size / 2);
+		}
 		
         this.happiness = Math.max(this.happiness - .01, 0);
         this.hunger = Math.max(this.hunger - .01, 0);
@@ -64,7 +67,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         }
 		
 		this.x += this.dx;
-		this.y += this.dy;
+		this.y = Math.min(this.y += this.dy, this.groundY - (this.size / 2));
 		this.setPosition(this.x, this.y);
 		
 		this.updateLook();
@@ -79,6 +82,8 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
         var pet = this;
         e.swallow(['mouseup','touchend'],function(){
             this.happiness = Math.min(this.happiness+5,100);
+			this.dy -= 10;
+			this.y -= 1;
         });
     });
 	
