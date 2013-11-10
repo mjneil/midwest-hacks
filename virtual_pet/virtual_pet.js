@@ -48,7 +48,7 @@ virtual_pet.start = function(){
         setFill('#8B5A00').setPosition(gameObj.width/2,gameObj.height*9/10)
     
     var appleButton = new lime.Sprite().setSize(gameObj.height/10,gameObj.height/10).
-        setPosition(gameObj.width/4,gameObj.height*9/10).setFill('images/apple.png');
+        setPosition(gameObj.width/4,gameObj.height/10).setFill('images/apple.png');
     
     goog.events.listen(appleButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
@@ -62,7 +62,7 @@ virtual_pet.start = function(){
     });
     
     var icecreamButton = new lime.Sprite().setSize(gameObj.height/20,gameObj.height/10).
-        setPosition(gameObj.width/2,gameObj.height*9/10).setFill('images/icecream.png');
+        setPosition(gameObj.width/2,gameObj.height/10).setFill('images/icecream.png');
     
     goog.events.listen(icecreamButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
@@ -76,7 +76,7 @@ virtual_pet.start = function(){
     });
     
     var toyButton = new lime.Sprite().setSize(gameObj.height/15,gameObj.height/10).
-        setPosition(gameObj.width*3/4,gameObj.height*9/10).setFill('images/toy.png');
+        setPosition(gameObj.width*3/4,gameObj.height/10).setFill('images/toy.png');
     
     goog.events.listen(toyButton, ['touchstart', 'mousedown'], function(e) {
         e.stopPropagation();
