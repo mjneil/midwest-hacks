@@ -18,7 +18,7 @@ virtual_pet.BodyPart = function(gameObj, gameLayer, pet, width, height, x, y, an
 	this.angle = angle;
 	this.facing = facing;
 	
-	this.setPosition(this.x*this.pet.growth,this.y*this.pet.growth);
+	this.setPosition(this.x,this.y);
 	this.updatePart();
 }
 
@@ -28,7 +28,13 @@ goog.inherits(virtual_pet.BodyPart,lime.RoundedRect);
  * update the part's look according to it's happiness and health
  */
 virtual_pet.BodyPart.prototype.updatePart = function() {
-    this.setSize(this.width*this.pet.growth,this.height*this.pet.growth);
+	this.height = this.height + (this.pet.growth)*this.height;
+	this.width = this.width + (this.pet.growth)*this.width;
+	this.x = this.x + (this.pet.growth)*this.x;
+	this.y = this.y + (this.pet.growth)*this.y;
+
+    this.setSize(this.width,this.height);
+	this.setPosition(this.x,this.y);
 	if(this.animates != 0){
    		this.setRotation(this.angle + this.animateAmount*this.facing - this.pet.dy*2*this.facing + this.pet.dx*2*this.facing);
 	}

@@ -14,21 +14,19 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	
 	this.age = 0;
 	
-    this.happiness = 75;
-    this.health = 75;
-	this.hunger = 75;
-	this.energy = 75;
+    this.happiness = 60;
+    this.health = 60;
+	this.hunger = 60;
+	this.energy = 60;
 	
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
 	this.grav = this.gameObj.grav;
-	this.size = 60 + 40 * Math.random();
+	this.size = 40 + 50 * Math.random();
 	this.height = this.size * 1.2 + 1 * Math.random();
 	this.width = this.size * 1 + .5 * Math.random();
-	this.sHeight = this.height;
-	this.sWidth = this.width;
 	
-	this.growth = 1;
+	this.growth = .001;
 	
 	this.x = this.gameObj.width/2;
 	this.y = this.gameObj.height/2;
@@ -151,20 +149,19 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		
         this.happiness = Math.max(this.happiness - .01, 0);
         this.hunger = Math.max(this.hunger - .01, 0);
-		this.health = Math.max(this.health - .01, 0);
+		if (this.hunger <= 0) this.health = Math.max(this.health - .05, 0);
 		this.energy = Math.min(this.energy + .01, 100);
+		this.energy = Math.max(this.energy, 0);
 		
-		this.age += .1;
-		this.growth = Math.min((this.growth + .0001*(this.happiness + this.hunger + this.health + this.energy) / 400) , 1.2);
-		this.height = this.sHeight * this.growth;
-		this.width = this.sWidth * this.growth;
+		this.height = this.height + (this.growth)*this.height;
+		this.width = this.width + (this.growth)*this.width;
 		
         
         //console.log('happiness:'+this.happiness);
         //console.log('health:'+this.health);
         
         //game over
-        if(this.happiness <= 0 || this.health <= 0) {
+        if(this.health <= 0) {
             //alert('Game over!');       
             location.reload(); 
         }
@@ -214,7 +211,7 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 			var pos = e.position;
 			console.log('x: ' + pos.x + '  y: ' + pos.y);
 			if(this.energy >= 5){
-				this.happiness = Math.min(this.happiness+5,100);
+				this.happiness = Math.min(this.happiness+3,100);
 				this.energy = Math.max(this.energy-2,0);
 				if(this.grounded)
 				{
