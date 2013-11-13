@@ -22,11 +22,11 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 	this.grounded = false;
 	this.groundY = this.gameObj.ground;
 	this.grav = this.gameObj.grav;
-	this.size = 40 + 50 * Math.random();
+	this.size = 60 + 40 * Math.random();
 	this.height = this.size * 1.2 + 1 * Math.random();
 	this.width = this.size * 1 + .5 * Math.random();
 	
-	this.growth = .001;
+	this.growth = 0;
 	
 	this.x = this.gameObj.width/2;
 	this.y = this.gameObj.height/2;
@@ -76,65 +76,82 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		}
 	}
 	
-	this.parts = [];
-	this.headParts = [];
+	//this.parts = [];
+	//this.headParts = [];
 	
-	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*1.5, this.width*.8, 0, -(this.height/2-10), 0, 0,1).setRadius(30).setAnchorPoint(0.5,1);
+	var head = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*1.5, this.width*.8, 0, -(this.height/2-10), 0, 0,1,.5).setRadius(30).setAnchorPoint(0.5,1);
 	this.appendChild(head);
-	this.parts.push(head);
+	//this.parts.push(head);
 	
-	var eyes = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, 0, -head.height*.6, 0, 0, 0).setFill(this.eyeTexture.none).setScale(1.8);
+	var eyes = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, 0, -head.height*.6, 0, 0, 0,.5).setFill(this.eyeTexture.none).setScale(1.8);
 	head.appendChild(eyes);
-	this.headParts.push(eyes);
+	//this.headParts.push(eyes);
 	
-	var mouth = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, 0, -head.height*.3, 0, 0, 0).setFill(this.mouthTexture.none);
+	var mouth = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, 0, -head.height*.3, 0, 0, 0,.5).setFill(this.mouthTexture.none);
 	head.appendChild(mouth);
-	this.headParts.push(mouth);
+	//this.headParts.push(mouth);
 	
-	var earRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, head.width/2+8, -head.height-22, 0, 0, 0).setFill(this.earTexture);
+	var earRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, head.width/2+8, -head.height-22, 0, 0, 0,.5).setFill(this.earTexture);
 	head.appendChild(earRight);
-	this.headParts.push(earRight);
+	//this.headParts.push(earRight);
 	
-	var earLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, -head.width/2-8, -head.height-22, 0, 0, 0).setFill(this.earTexture).setScale(-1,1);
+	var earLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, 64, 64, -head.width/2-8, -head.height-22, 0, 0, 0,.5).setFill(this.earTexture).setScale(-1,1);
 	head.appendChild(earLeft);
-	this.headParts.push(earLeft);
+	//this.headParts.push(earLeft);
 	
-	var armLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, -(this.width/2) + 10, -(this.height/4), 45, 1,1).setAnchorPoint(1,.5).setRadius(30);
+	var armLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, -(this.width/2) + 10, -(this.height/4), 45, 1,1,1).setAnchorPoint(1,.5).setRadius(30);
 	this.appendChild(armLeft);
-	this.parts.push(armLeft);
+	//this.parts.push(armLeft);
 	
-	var armRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, (this.width/2) - 10, -(this.height/4), -45, 1,-1).setAnchorPoint(0,.5).setRadius(30);
+	var armRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.8, this.width*.2, (this.width/2) - 10, -(this.height/4), -45, 1,-1,1).setAnchorPoint(0,.5).setRadius(30);
 	this.appendChild(armRight);
-	this.parts.push(armRight);
+	//this.parts.push(armRight);
 	
-	var pawLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, 0, -45, 1, 0).setFill('images/hand.svg').setScale(-.8,.8);
+	var pawLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, 0, -45, 1, 0,1).setFill('images/hand.svg').setScale(-.8,.8);
 	armLeft.appendChild(pawLeft);
 	
-	var pawRight = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, this.width*.8, 0, -45, 1, 0).setFill('images/hand.svg').setScale(.8,.8);
+	var pawRight = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, this.width*.8, 0, -45, 1, 0,1).setFill('images/hand.svg').setScale(.8,.8);
 	armRight.appendChild(pawRight);
 	
-	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.7, this.width*.3, -(this.width/2) + 20, (this.height/2), 0, 1,1).setAnchorPoint(1,1).setRadius(30);
+	var legLeft = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.7, this.width*.3, -(this.width/2) + 20, (this.height/2), 0, 1,1,1).setAnchorPoint(1,1).setRadius(30);
 	this.appendChild(legLeft,0);
-	this.parts.push(legLeft);
+	//this.parts.push(legLeft);
 	
-	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.7, this.width*.3, (this.width/2) - 20, (this.height/2), 0, 1,-1).setAnchorPoint(0,1).setRadius(30);
+	var legRight = new virtual_pet.BodyPart(this.gameObj, this.gameLayer, this, this.width*.7, this.width*.3, (this.width/2) - 20, (this.height/2), 0, 1,-1,1).setAnchorPoint(0,1).setRadius(30);
 	this.appendChild(legRight,0);
-	this.parts.push(legRight);
+	//this.parts.push(legRight);
 	
-	var footRight = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, this.width*.8, -this.width*.3, 0, 1, 0).setFill('images\/foot.svg').setScale(.8,.8);
+	var footRight = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, this.width*.8, -this.width*.3, 0, 1, 0,1).setFill('images\/foot.svg').setScale(.8,.8);
 	legRight.appendChild(footRight);
 	
-	var footLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, -this.width*.3, 0, 1, 0).setFill('images\/foot.svg').setScale(-.8,.8);
+	var footLeft = new virtual_pet.BodyPart(this.gameObj,this.gameLayer, this, 64, 64, -this.width*.8, -this.width*.3, 0, 1, 0,1).setFill('images\/foot.svg').setScale(-.8,.8);
 	legLeft.appendChild(footLeft);
+	
+	this.parts = {
+		head: head,
+		eyes: eyes,
+		mouth: mouth,
+		earRight: earRight,
+		earLeft: earLeft,
+		armRight: armRight,
+		armLeft: armLeft,
+		pawRight: pawRight,
+		pawLeft: pawLeft,
+		legLeft: legLeft,
+		legRight: legRight,
+		footRight: footRight,
+		footLeft: footLeft
+	}
 	
 	this.updateLook();
 	
     var dt = this.gameObj.dt;
     var i, arrayLen, toRemove;
-	this.startTime = [];
-	for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
-		this.startTime[i] = new Date().getTime();
-	}
+	//this.startTime = [];
+	//for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
+		//this.startTime[i] = new Date().getTime();
+	//}
+	this.startTime = new Date().getTime();
 	
     lime.scheduleManager.scheduleWithDelay(function() {
 	
@@ -192,16 +209,23 @@ virtual_pet.Pet = function(gameObj, gameLayer) {
 		this.y = Math.min(this.y += this.dy, this.groundY - (this.height / 2));
 		this.setPosition(this.x, this.y);
 		
+		var animateAmt = Math.sin((new Date().getTime() - this.startTime)*this.gameObj.dt/4000)*5;
+		this.parts.legLeft.animateAmount = animateAmt;
+		this.parts.legRight.animateAmount = animateAmt;
+		this.parts.armRight.animateAmount = animateAmt;
+		this.parts.armLeft.animateAmount = animateAmt;
+		
 		this.updateLook();
-		for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
+		
+		//for(i = 0, partsLen = this.parts.length; i < partsLen; i++){
 			
-			if(this.parts[i].animates != 0){
+			//if(this.parts[i].animates != 0){
 				//if((new Date().getTime() - this.startTime[i]) > (this.gameObj.dt*5)){
-					this.parts[i].animateAmount = Math.sin((new Date().getTime() - this.startTime[i])*this.gameObj.dt/4000)*5;
+				//	this.parts[i].animateAmount = Math.sin((new Date().getTime() - this.startTime[i])*this.gameObj.dt/4000)*5;
 				//}
-			}
-			this.parts[i].updatePart();
-		}
+			//}
+			//this.parts[i].updatePart();
+		//}
 		
     }, this, dt);
 	//END OF SCHEDULER
@@ -238,23 +262,35 @@ virtual_pet.Pet.prototype.updateLook = function() {
     this.setSize(this.width,this.height);
 	
     if(this.happiness > 75){
-		this.headParts[0].setFill(this.eyeTexture.happy);
-		this.headParts[1].setFill(this.mouthTexture.happy);
+		this.parts.eyes.setFill(this.eyeTexture.happy);
+		this.parts.mouth.setFill(this.mouthTexture.happy);
 	}else if(this.happiness > 50){
-		this.headParts[0].setFill(this.eyeTexture.none);
-		this.headParts[1].setFill(this.mouthTexture.none);
+		this.parts.eyes.setFill(this.eyeTexture.none);
+		this.parts.mouth.setFill(this.mouthTexture.none);
 	}else if(this.happiness > 25){
-		this.headParts[0].setFill(this.eyeTexture.sad);
-		this.headParts[1].setFill(this.mouthTexture.sad);
+		this.parts.eyes.setFill(this.eyeTexture.sad);
+		this.parts.mouth.setFill(this.mouthTexture.sad);
 	}else if(this.happiness > 0){
-		this.headParts[0].setFill(this.eyeTexture.angry);
-		this.headParts[1].setFill(this.mouthTexture.sad);
+		this.parts.eyes.setFill(this.eyeTexture.angry);
+		this.parts.mouth.setFill(this.mouthTexture.sad);
 	}
     //color according to the happiness (between green and red)
     var redAmount = parseInt((this.health)/100*this.colorR);
     var greenAmount = parseInt((100-this.health)/100*this.colorG);
 	var blueAmount = parseInt((100-this.health)/100*this.colorB); 
     this.setFill(redAmount,greenAmount, blueAmount);
+	this.parts.armLeft.updatePart(1);
+	this.parts.armRight.updatePart(1);
+	this.parts.legLeft.updatePart(1);
+	this.parts.legRight.updatePart(1);
+	this.parts.head.updatePart(1);
+	this.parts.eyes.updatePart(0);
+	this.parts.earLeft.updatePart(0);
+	this.parts.earRight.updatePart(0);
+	this.parts.pawLeft.updatePart(0);
+	this.parts.pawRight.updatePart(0);
+	this.parts.footLeft.updatePart(0);
+	this.parts.footRight.updatePart(0);
 };
 
 
