@@ -72,6 +72,15 @@ virtual_pet.start = function(e){
     var pet = new virtual_pet.Pet(gameObj, gameLayer).setRadius(30);
     gameLayer.appendChild(pet);
 	
+	var titleLine = new lime.Label().setFontFamily('Verdana').setFontColor('#fff').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width*4/5, gameObj.height/30).setText('Eks - By Nick Vander Woude and Matt Neil');
+	var titleLine2 = new lime.Label().setFontFamily('Verdana').setFontColor('#fff').setFontSize(14).setFontWeight('normal').setPosition(gameObj.width*4/5, gameObj.height/15).setText('Alpha version 1.0');
+	var stitleLine = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(1+gameObj.width*4/5, 2+gameObj.height/30).setText('Eks - By Nick Vander Woude and Matt Neil');
+	var stitleLine2 = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(14).setFontWeight('normal').setPosition(1+gameObj.width*4/5, 2+gameObj.height/15).setText('Alpha version 1.0');
+	gameLayer.appendChild(stitleLine);
+	gameLayer.appendChild(stitleLine2);
+	gameLayer.appendChild(titleLine);
+	gameLayer.appendChild(titleLine2);
+	
 	var petMeta = new lime.Label().setFontFamily('Verdana').setFontColor('#000').setFontSize(16).setFontWeight('bold').setPosition(gameObj.width/2, gameObj.height-20);
 		gameLayer.appendChild(petMeta);
 	lime.scheduleManager.scheduleWithDelay(function() {
